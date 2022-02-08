@@ -1,0 +1,541 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;500;700&display=swap');
+@import url("notes-style.css");
+
+body{
+	width: 100%;
+	font-size: 16px;
+	font-family: 'Noto Sans TC', sans-serif;
+}
+
+.home-page{
+	background-color: #5845a1;
+	background-image: url(../image/Body_BgPoint_repeat.png);
+	background-repeat: repeat;
+	background-size: contain;
+	background-attachment: fixed;
+}
+.container{
+	width:90%;
+	margin: auto;
+}
+.sr-only{
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	overflow: hidden;
+}
+.title-img{	display: inline-block;}
+.title-img img,
+.btn-box img{ 
+	width: 100%;
+	vertical-align: middle;
+}
+
+a { text-decoration: none;}
+
+/*main-header-------------
+--------------------------*/
+.main-header{
+	width: 100%;
+	border-bottom: 10px solid #fff;
+	background-color: #f36518;
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+.logo{
+	display: block;
+	margin: auto;
+	max-width: 350px;
+}
+.logo img{
+	width: 100%;
+	vertical-align: middle;
+}
+.main-nav{
+	width: 100%;
+	font-size: 0;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+}
+.main-nav .nav-item{
+	display: inline-block;
+	width:33.33%;
+	background-color: #00a1a3;
+	position: relative;
+	transition: .1s;
+}
+.main-nav .nav-item:hover{	background-color: #ff5e79;}
+
+.main-nav .nav-item span{
+	display: none;
+	font-size: 18px;
+	font-weight: 300;
+	color: #fff;
+}
+.main-nav .nav-item img{
+	width: 100%;
+}
+
+/*kv----------------------
+--------------------------*/
+.kv {
+	background-image: url(../image/KV_RocketCloud_repeat.png),
+					  url(../image/KV_Bgimage-xs.png);
+	background-repeat: repeat-x, no-repeat;
+	background-size: contain, cover; 
+	background-position: center bottom, center bottom;
+	position: sticky;
+	top: 0;
+}
+.reward-block{ 
+	font-size: 0;
+	padding-bottom: 25%;
+}
+.reward-block .reward-box{
+	display:inline-block;
+	width: 50%;
+	text-align: center;
+}
+.reward-box .reward-item{ 
+	width: 100%;
+	position: relative;
+}
+.reward-box :first-child{ 
+	width: 75%; 
+	margin: auto;
+	animation: fly 3s 1.5s infinite ease-in-out alternate;
+}
+.reward-box :last-child {
+	top: -30PX;
+	animation: fly 3s infinite ease-in-out alternate;
+}
+
+/*description-------------
+--------------------------*/
+.description{
+	background-color: #fff;
+	position: relative;
+}
+.description::before,
+.description::after{
+	content: "";
+	width: 100%;
+	height: 100%;
+	background-repeat: repeat-x;
+	background-size: contain; 
+	position: absolute;
+	left: 0;
+	/*絕對定位導致下面的星星會碰不到，只好讓他可以穿透了*/
+	pointer-events: none;
+}
+.description::before{
+	background-image:url(../image/KV_RocketCloudWhite_repeat.png);					 
+	background-position: center bottom;
+	bottom: 100%;
+}
+.description::after{
+	background-image:url(../image/Mission_TopClould_repeat.png);					 
+	background-position:center top;
+	top: 100%;
+	z-index: 5;
+	pointer-events: none;
+}
+
+.description .container{ position: relative;}
+.description .container::before{
+	content: "";
+	width: 100%;
+	height: 100%;
+	background-image:url(../image/KV_Rocket.png);					 
+	background-repeat: no-repeat;
+	background-size: 20%; 
+	background-position:center bottom;
+	position: absolute;
+	left: 0;
+	bottom: 100%;
+	z-index: 5;
+	pointer-events: none;
+}
+
+.description .title-box{ 
+	margin-bottom: 10px;
+	text-align: center;
+}
+.description .title-img{
+	display: inline-block;
+	width:100%;
+}
+.description .title-box p{
+	font-size: 4vw;
+	font-weight: 700;
+	color: #5b4d49;
+	line-height: 1.5;
+}
+.description .title-box span{ 
+	display: block;
+}
+
+.description-box{ font-size: 0;}
+.description-box img{ 
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.description-note{
+	font-size: 3vw;
+	font-weight: 700;
+	color:#5b4d49;
+	text-align: center;
+	margin-bottom: 20px;
+}
+.description .btn-box:hover{
+	animation: shrink .5s infinite linear alternate;
+}
+
+
+/*mission-----------------
+--------------------------*/
+.mission .container{
+	background-image: url(../image/Mission_BgimageTop-xs.png);
+	background-size: contain;
+	background-position: center top 1.5% ;
+	background-repeat: no-repeat;	
+}
+.mission .title-box{ padding-top: 35%;}
+.mission .title-img{ display: inline-block;} 
+
+.mission-block{
+	background-image: url(../image/Mission_BgimageBody_repeat-xs_h2625.png);
+	background-size: contain;
+	background-position: center top ;
+	background-repeat: no-repeat;	
+}
+.mission-block .mission-star{
+	background-image: url(../image/Mission_Star_BgGreen-Normal.png);
+	background-size: contain;
+	background-position: center;
+	background-repeat: no-repeat;
+	transition: .1s;
+}
+.mission-block .mission-star:active{ transform: translate(5px,5px);}
+.mission-block .mission-star:hover{	background-image: url(../image/Mission_Star_BgGreen-Hover.png);}
+
+.mission-block .mission-star:nth-child(2){ 
+	background-image: url(../image/Mission_Star_BgGreen-Hover.png);
+}
+.mission-block .mission-star:nth-child(7){
+	background-image: url(../image/Mission_Star_BgPurple-Hover.png);
+	transition: .2s;
+}
+
+.mission-star .mission-img img{ 
+	width: 100%;
+	vertical-align: middle;
+}
+
+/*notice------------------
+--------------------------*/
+.notice{
+	background-image: url(../image/Notice_Bgimage-xs.png);
+	background-size: cover;
+	background-position: center bottom;
+	background-repeat: no-repeat;
+}
+
+.notice .btn-box{ padding-bottom: 50%;background-color: }
+.notice .btn-box img:hover{ animation: shrink .5s infinite linear alternate;}
+
+.notice .btn-box img{ vertical-align: middle; }
+
+
+/*main-footer--------------
+--------------------------*/
+.main-footer{ background-color: #717171;}
+
+.main-footer .container{
+	padding: 10px 0 100px;
+	box-sizing: border-box;
+	text-align: center;
+}
+.main-footer .footer-title{ 
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+.main-footer .footer-title h2{
+	font-size: 8vw;
+	font-weight: 700;
+	line-height: 2;
+	color:#ddd;
+}
+.main-footer p{
+	margin-bottom: 20px;
+	font-size: 4vw;
+	font-weight: 300;
+	color:#ddd;
+	line-height: 1.2;
+}
+.main-footer .tele{
+	width: 100%;
+	border-top: 2px solid #ddd;
+	padding-top: 20px;
+	color:#f1d108;
+	font-size: 5vw;
+	font-weight: 500;
+}
+.main-footer .tele a,
+.main-footer .tele a:visited{ color:#f1d108;}
+.main-footer .tele a:hover  { color:#f36518;}
+
+
+/*---------------------------------
+-------@media 768px以下------------
+----------------------------------*/
+@media screen and (max-width: 767px){
+
+	.main-nav .nav-item ~ .nav-item::before{
+		content: " ";
+		width:2px;
+		height: 100%;
+		background-color: #fff9;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	
+}
+/*---------------------------------
+-------@media 768px以上------------
+----------------------------------*/
+@media screen and (min-width: 768px){
+
+	.container{
+		width: 100%;
+		max-width: 1200px;
+	}
+
+	/*---main-header---*/
+	.logo{ display: inline-block;}
+	
+	.main-nav{
+		width: auto;
+		position: relative;
+		top: 25px;
+		float: right;
+	}
+	.main-nav .nav-item{
+		width: auto;
+		padding: 8px 25px;
+		border-radius:  2000px;
+		background-color: transparent;
+		transition: background-color .1s;
+	}
+	.main-nav .nav-item span{ display: inline-block;}
+	.main-nav .nav-item img{ display: none;}
+
+	.main-nav .nav-item:hover{	background-color: #fff;}
+	.main-nav .nav-item:hover span{ color:#F36518;}
+
+
+	/*---kv---*/
+	.kv{
+		background-image:url(../image/KV_RocketCloud_repeat.png),
+						 url(../image/KV_Bgimage-lg.png);
+		background-size:768px auto, cover; 
+		background-repeat: repeat-x, no-repeat;
+		background-position:center bottom, center bottom ;
+	}
+	.reward-block{ padding-bottom: 20%;}
+	
+	.reward-block .reward-item{	width: 50%;}
+	
+	.reward-block :nth-child(2) :first-child{ float: right;}
+	.reward-block :nth-child(1) :last-child { top:70px; left: -60px;}
+	.reward-block :nth-child(2) :last-child { top:70px; left: 60px;}
+
+
+	/*---description---*/
+	.description::before{
+		background-image:url(../image/KV_RocketCloudWhite_repeat.png);					 
+		background-repeat: repeat-x;
+		background-size: 768px auto;
+	}
+	.description::after{
+		background-image:url(../image/Mission_TopClould_repeat.png);					 
+		background-repeat: repeat-x;
+		background-size: 768px auto; 
+	}
+
+	.description .container{ position: relative;}
+	.description .container::before{
+		content: "";
+		width: 100%;
+		height: 100%;
+		background-image:url(../image/KV_Rocket.png);					 
+		background-repeat: no-repeat;
+		background-size: 15%; 
+		background-position: center bottom;
+	}
+
+	.description .title-img {
+		max-width: 40%;
+		margin: auto;
+	}
+
+	.description .title-box p{ font-size: 1.4em;}
+	.description .title-box span{ display: inline-block;}
+	.description .title-box span::after{ content: "，";	}
+	
+	.description-note { font-size: 1.2em;}
+
+	.description-box img{ width: 50%;}
+
+	.description .btn-box {
+		max-width: 350px;
+		margin: auto;
+	}
+
+	/*---mission---*/
+	.mission .container{
+		background-image: url(../image/Mission_BgimageTop-lg.png);
+		background-size: contain;
+		background-position: center top 3%;
+		background-repeat: no-repeat;	
+	}
+	.mission-block{
+		padding: 5% 0;
+		background-image: url(../image/Mission_BgimageBody-lg.png);
+		background-size: contain;
+		background-position: center top ;
+		background-repeat: no-repeat;	
+	}
+	.mission .title-box{
+		padding-top: 20%;
+		text-align: center;
+	}
+	.mission .title-img{
+		max-width: 60%;
+	}
+	.mission-star{
+		display: inline-block;
+		max-width: 30%; 
+		margin-bottom: 10%;
+		position: relative;
+		}
+	
+
+	.mission-block .mission-star:nth-child(1){
+		margin-left: 10%;
+	}
+	.mission-block .mission-star:nth-child(2){
+		margin-left: 20%;
+		top:2em;
+	}
+	.mission-block .mission-star:nth-child(3),
+	.mission-block .mission-star:nth-child(4),
+	.mission-block .mission-star:nth-child(5){
+		margin-left: 3.3%;
+		float: right;
+	}
+	.mission-block .mission-star:nth-child(4){ top:2em;}
+	.mission-block .mission-star:nth-child(5){ top:4em;}
+	.mission-block .mission-star:nth-child(6){
+		margin-left: 10%;
+	}
+	.mission-block .mission-star:nth-child(7){
+		background-image: url(../image/Mission_Star_BgPurple-Normal.png);
+		background-position: 10px 0;
+		margin-left: 15%;
+		padding-right: 10px;
+		top:2.5em;
+		transform: scale(1.3);
+		transition: .2s;
+	}
+	.mission-block .mission-star:nth-child(7):hover{
+		background-image: url(../image/Mission_Star_BgPurple-Hover.png);
+	}
+	.mission-block .mission-star:nth-child(7):active{
+		background-image: url(../image/Mission_Star_BgPurple-Hover.png);
+		transform: scale(1.3) translate(5px,5px);
+
+	}
+
+
+	/*notice------------------
+	--------------------------*/
+	.notice{
+		background-image: url(../image/Notice_Bgimage-lg.png);
+		background-size: contain;
+	}
+	.notice .btn-box{
+		width: 30%;
+		min-width: 400px;
+		margin: auto;
+		padding-bottom: 30%;
+	}
+
+
+	/*main-footer--------------
+	--------------------------*/
+	.main-footer .container{
+		padding: 30px;
+	}
+	.main-footer .footer-title{
+		width: 100%;
+		font-size: 0;
+	}
+	.main-footer .footer-title h2{
+		display: inline-block;
+		width: 50%;
+		text-align: left;
+	}
+	.main-footer .footer-title p{
+		display: inline-block;
+		width: 50%;
+		font-size: 1rem;
+		text-align: left;
+		vertical-align: middle;
+	}
+	.main-footer .tele{
+		font-size: 26px;
+	}
+}
+
+/*---------------------------------
+-------@media 768 ~ 1200px---------
+----------------------------------*/
+@media (min-width: 768px) and (max-width: 1200px){
+
+	.main-footer .footer-title h2{	font-size: 4vw;}
+
+}
+/*---------------------------------
+-------@media 1200px以上-----------
+----------------------------------*/
+@media screen and (min-width: 1200px){
+	.kv{ background-size: 1200px auto,cover; }
+	.description::before{ background-size: 1200px auto;}
+	.description::after{ background-size: 1200px auto; }
+	.main-footer .footer-title h2{ font-size: 50px; }
+}
+
+/*---------------------------------
+-------@media 1920px以上-----------
+----------------------------------*/
+@media screen and (min-width: 1920px){
+	.kv{ background-size: 1200px auto,1920px auto}
+	.notice{ background-size: 1920px auto;}
+}
+
+/*-------------------------------
+☆------Ａｎｉｍａｔｉｏｎ--------☆
+--------------------------------*/
+@keyframes fly{
+	0%   {transform: translateY(0);}
+	100% {transform: translateY(15px);}
+}
+@keyframes shrink{
+	0%   {transform: scale(1);}
+	100% {transform: scale(1.05);}
+}

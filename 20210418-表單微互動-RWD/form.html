@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/style.css">
+	<title>表單微互動設計</title>
+</head>
+<body>
+	<div class="wrapper">
+		<div class="main ">
+			<div class="loginCard mt-5 ">
+				<div class="row">
+					<div class="col-12 col-md-8 p-0">
+						<div class="form-bg p-4">
+							<div class="bgImg" style="background-image:url(img/image2.jpg)"></div>
+							<h2 class="heading">聯繫我們</h2>
+							<p class="message">如果你有產品上的疑慮，或是對產品有所建議的話，歡迎聯繫我們!</p>
+						</div>
+							
+					</div>
+					<div class="col-12 col-md-4 p-0">
+						<form class="form" action="#">
+							<div class="form-container">						
+								<input class="js-input" id="name"type="text" >
+								<label class="label-text " for="name">Name</label>
+							</div>
+							<div class="form-container">						
+							<input class="js-input" id="email"type="email" >
+							<label class="label-text " for="email">E-mail</label>
+							</div>
+							<div class="form-container">	
+								<textarea class="js-input" name="" id="" cols="auto" rows="auto"></textarea>
+								<label class="label-text " for="question">問題/建議</label>
+							</div>							
+							<div class="btn-box">
+								<input class="btn-submit" type="submit">
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!--------- JS ---------->
+	<script src="JS/plugins/jQuery/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".js-input").focus(function(){
+				$(this).parent().find(".label-text").addClass("is-active");
+			})
+			$(".js-input").blur(function(){
+				if($(this).val().length == 0 ){
+					$(this).parent().find(".label-text").removeClass("is-active");
+				}	
+			})
+
+
+
+		})
+	</script>
+</body>
+</html>
