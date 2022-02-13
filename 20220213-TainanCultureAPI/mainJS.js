@@ -103,13 +103,18 @@ function rederPlace(arr){
      let newDiv = document.createElement('ul');
       newDiv.className = "detail";
       newDiv.innerHTML = `<li>${detail["year"]}</li>
-                          <li>${detail["month"]}</li>
+                          <li>${detail["month"]}月</li>
                           <li>${detail["place"]}</li>
                           <li>${detail["visitor"]}</li>`
      detailList.append(newDiv);
+     
+     //讓搜尋結果的視窗位置永遠保持在底部
+     detailList.scrollTop = detailList.scrollTop + detailList.scrollHeight;
    }   
   //清除搜尋結果
    clear.addEventListener('click', function(){
         detailList.innerHTML = '';
    })
 })//then 尾巴
+
+
