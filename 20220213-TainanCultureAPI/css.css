@@ -71,6 +71,7 @@ select > option{  background-color: #ecedf1;}
   margin: auto;
   text-align: center;
   box-shadow:  0 0 20px 10px #0006;
+  border-radius: 10px;
 }
 .detail-title{
   display: flex;
