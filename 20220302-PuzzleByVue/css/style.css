@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  html,
+  body {
+    width: 100%;
+    height: 100%;
+    background-color: #233245;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "微軟正黑體";
+  }
+  
+  #app {
+    width: 1050px;
+    overflow: hidden;
+  }
+  #app > div {
+    background-size: 100% 100%;
+  }
+  #app > div > ul > li {
+    cursor: pointer;
+    display: block;
+    width: 33.333333%;
+    aspect-ratio: 3/2;
+    border: 1px solid #fff;
+    float: left;
+  }
+  #app > div > ul > li > img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .wait {
+    min-width: 360px;
+    width: 45%;
+    aspect-ratio: 3/2;
+    background-color: #fff8;
+    float: left;
+  }
+  .carried {
+    min-width: 360px;
+    width: 45%;
+    aspect-ratio: 3/2;
+    background-color: #fff;
+    float: right;
+    background-image: url("../images/2022-tiger.jpg");
+  }
+  .winPage {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transform: scale(0) rotate(180deg);
+    transition: transform .5s ease-out;
+  }
+  .winPage.open {
+    transform: scale(1) rotate(720deg);
+  }
+  
+  .winPage > h1 {
+    color: #fff;
+    font-size: 60px;
+  }
+  

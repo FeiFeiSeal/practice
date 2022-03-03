@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puzzle</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <div class="wait">
+        <ul>
+          <li v-for="(item, idx) in todoWait.content"
+              :key="item.url"
+              @click="handleClick(item, idx)"
+            >
+            <img :src="item.url" alt="puzzle-card" />
+          </li>
+        </ul>
+      </div>
+      <div class="carried">
+        <ul>
+          <li v-for="(item, idx) in todoOver.content"
+              :key="item.url"
+              @click="resetClick(item, idx)">
+            <img :src="item.url" alt="puzzle-card"/>
+          </li>
+        </ul>
+      </div>
+      <div :class="['winPage', {open: isWin}]">
+        <h1>虎年行大運 (￣▽￣)~*</h1>
+        <button @click="reset()">再玩一次</button>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <script src="./js/vue.js"></script>
+    <script src="./js/main.js"></script>
+  </body>
+</html>
