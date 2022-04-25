@@ -1,0 +1,203 @@
+/*global*/
+:root{
+    --color: #15aabf;
+}
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    box-sizing: border-box;
+}
+html,body{
+    width: 100%;
+    height: 100%;
+}
+body{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction:column; 
+    padding: 30px 15px;
+    font-family: "微軟正黑體",serif;
+    background:
+        repeating-linear-gradient(to top, transparent 0px 48px, #acdfe655 48px 52px,transparent 52px 100px),
+        repeating-linear-gradient(to right, transparent 0px 48px, #acdfe655 48px 52px,transparent 52px 100px),
+        repeating-linear-gradient(-45deg, transparent 0px 6px, #e0eafcaa 6px 8px),
+        repeating-linear-gradient(to right, transparent 0 100px,#e0eafc88 100px 200px),
+        repeating-linear-gradient(to top, transparent 0 100px,#e0eafc88 100px 200px),
+        #fcf6e7;
+}
+.main-list{
+    width: 70%;
+    max-width: 800px;
+    padding: 20px 30px;
+    margin: 30px;
+    border-radius:5px;
+    background-color: #fffe;
+    box-shadow: 0 3px 5px 5px #0001;
+}
+/*清單標題區------------------*/
+.title-block h1{
+    display: inline-block;
+    font-size: 26px;
+    vertical-align: middle;   
+}
+.title-block .title-icon{
+    display: inline-block;
+    padding-right: 10px;
+    color: var(--color);
+    font-size: 54px;
+    vertical-align: middle; 
+}
+/*清單項目區------------------*/
+.main-list .list-block{
+    display: flex;
+    height: 70vh;
+    padding-top: 20px;
+    padding-bottom: 60px;
+    flex-direction:column;
+    overflow-y: scroll;
+}
+.list-block li{
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius:5px;
+    font-size: 16px;
+    background-color: #ccd5;
+    transition:background-color .2s;
+}
+.list-block li:hover{  background-color: #cde9;}
+.list-block li:hover .fnc-box{  display: flex;}
+
+.list-block li label{  
+    display: flex;
+    width: 85%;
+    cursor: pointer;
+}
+.list-block input[type='checkbox']{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+    border: 1px solid #999;
+    border-radius: 3px;
+    background-color: #fff;
+    -webkit-appearance: none;
+    position: relative;
+}
+.list-block input[type='checkbox']:checked {
+    border: 1px solid var(--color);
+    background-color: var(--color);
+}
+.list-block input[type='checkbox']:checked + .note-box span{
+    color:#666;
+    text-decoration:line-through 3px solid #555 ; /*目前支援度不好，比如在safari上沒有顯示*/
+    position: relative;
+}
+.list-block input[type='checkbox']:checked:after{
+    content:" ✓";
+    color:#fff;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 20px;
+    position: absolute;
+    top: 0;
+}
+.list-block .note-box{
+    width: calc(100% - 35px);
+    margin-right: 10px;
+    word-break: break-all;
+    position: relative;
+}
+.list-block .note-box .edit{
+    display: none;
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #0005;
+    font-size: 16px;
+    background-color: #ffe6e6;
+    word-break: break-all;
+    resize: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+.list-block .note-box .edit:focus{ outline: none;}
+.list-block .note-box.e-active .edit{ display: inline-block;}
+
+.list-block .fnc-box{
+    display: none;
+    justify-content: space-evenly;
+    width: 15%;
+    color: #0008;
+    font-size: 14px;
+}
+.list-block .fnc-box.e-active{ display: flex; }
+
+.list-block .edit-item,
+.list-block .delete-item{  
+    transition:  .15s;
+}
+.list-block .edit-item:hover,
+.list-block .delete-item:hover{
+    color: #f66;
+    transform: scale(1.3);
+}
+.list-block .edit-item{ margin-right: 10px;}
+
+.list-block .fnc-box .edit-item span:last-child{   display: none;}
+.list-block .fnc-box.e-active .edit-item span:first-child{ display: none;}
+.list-block .fnc-box.e-active .edit-item span:last-child{ display: inline-block;}
+
+/*增加項目區------------------*/
+.main-list .add-block{
+    display: flex;
+    padding-top: 20px;
+}
+.add-block input[type="text"]{
+    width: 85%;
+    padding: 5px 15px;
+    margin-right: 15px;
+    border: 1px solid #ccc;
+}
+.add-block input[type="text"]:focus{
+    outline: none;
+    box-shadow: 0 0 5px var(--color); 
+}
+.add-block .add-btn{
+    width: 15%;
+    color: var(--color);
+    font-size: 34px;
+    text-align: center;
+    transition: .15s;
+}
+.add-block .add-btn:hover{ transform: scale(1.2);}
+.add-block .add-btn:active{ color: #ff6666;}
+
+@media screen and (max-width: 768px){
+    .main-list{  width: 90%;}
+}
+@media screen and (max-width: 375px){
+    .main-list{  width: 100%;}
+    .list-block li{
+        flex-direction: column;
+    }
+    .list-block li label{
+        width: 100%;
+        margin-right: 0;
+    }
+    .list-block .note-box{
+        margin-bottom: 15px;
+    }
+    .list-block .fnc-box{
+        display: flex;
+        justify-content: flex-end;
+        width: 100%;
+        font-size: 18px;
+    }
+    .list-block .edit-item{
+        margin-right: 30px;
+    }
+}
