@@ -1,5 +1,11 @@
 const addItem = {
-    dataArr:["測試1", "測試2", "超長文字測試3超長文字測試3超長文字測試3超長文字測試3超長文字測試3超長文字測試3超長文字測試3超長文字測試3"],
+    dataArr:["ABCDEFGHUJKLMN", 
+             "一二三四五六七八九十", 
+             "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
+            "Javascript30是一個線上的教學課程，利用三十天的時間每天實作一個簡單的JS作品並自身初學者的角度講解相關概念。 ",
+            "git",
+            "▽. ˙‥‧‵、。﹐﹒﹔﹕！＃＄％＆＊，．：；？＠～•…·¡¿¦¨¯´·¸º‽‼⁏※†‡ˉ˘⁇⁈⁉",
+          ],
     addEl(value){
            this.dataArr.push(value);
            this.render();
@@ -7,9 +13,67 @@ const addItem = {
     removeEl(item){
             this.dataArr.splice(item.dataset.id.substr(1), 1);
             this.render();
-    },
-    editEl(){
+    },   
+    editEl(item, idx){
+       let fucBox = item.parentNode;
+       let notBox =  item.parentNode.parentNode.querySelector('.note-box');
+       let editInput = item.parentNode.parentNode.querySelector('.edit');
+       
+       function removeClass(){
+         fucBox.classList.remove('e-active');
+         notBox.classList.remove('e-active');
+       }
+         fucBox.classList.add('e-active')
+         notBox.classList.add('e-active');
       
+      //結束編輯，把編輯內容推到資料arr，並重新render
+      //blur 涵蓋了點擊OK...
+      // item.addEventListener('click', ()=>{
+      //   console.log('click');
+      //    removeClass();
+      //    addItem.dataArr[idx] = editInput.value;
+      //    addItem.render();
+      // });  
+      editInput.addEventListener('keyup', (e)=>{
+        if(e.keyCode === 13){
+           removeClass();
+           addItem.dataArr[idx] = editInput.value;
+           addItem.render();
+        };
+      });
+      editInput.addEventListener('blur', ()=>{
+         removeClass();
+         addItem.dataArr[idx] = editInput.value;
+         addItem.render();
+      })
+  
+    },
+    shiftcheck(e){
+      const InputArray = Array.from(document.querySelectorAll('.list-block input[type="checkbox"]'));
+      
+      //項目判斷是否在勾選的兩個項目之間，碰到第一個勾選的會打開，後勾選時關閉
+      //當開關開啟時，迴圈內的項目皆會勾選
+      let inBetween = false; 
+      
+      //假使使用者在全無勾選情況下就案shift勾選可以一次全選
+      let first = InputArray[0];
+      if(!e.shiftKey && this.checked){ first = this;}
+      
+      //當案著 shift + 勾選時才會觸發連續勾選
+      if(e.shiftKey && this.checked){
+        let lastCheck = this;
+
+        InputArray.forEach((el)=>{
+          if(el === first ||el === lastCheck){
+            inBetween = !inBetween;
+          }
+          if (inBetween){
+            el.checked = true;
+          }
+        })
+      }
+      
+
     },
     render(){
       let toHTML = "";
@@ -68,40 +132,11 @@ const addItem = {
            item.parentNode.parentNode.querySelector('.edit').focus();
         });
       })
-    },
-    editEl(item, idx){
-       let fucBox = item.parentNode;
-       let notBox =  item.parentNode.parentNode.querySelector('.note-box');
-       let editInput = item.parentNode.parentNode.querySelector('.edit');
-       
-       function removeClass(){
-         fucBox.classList.remove('e-active');
-         notBox.classList.remove('e-active');
-       }
-         fucBox.classList.add('e-active')
-         notBox.classList.add('e-active');
-      
-      //結束編輯，把編輯內容推到資料arr，並重新render
-      //blur 涵蓋了點擊OK...
-      // item.addEventListener('click', ()=>{
-      //   console.log('click');
-      //    removeClass();
-      //    addItem.dataArr[idx] = editInput.value;
-      //    addItem.render();
-      // });  
-      editInput.addEventListener('keyup', (e)=>{
-        if(e.keyCode === 13){
-           removeClass();
-           addItem.dataArr[idx] = editInput.value;
-           addItem.render();
-        };
-      });
-      editInput.addEventListener('blur', ()=>{
-         removeClass();
-         addItem.dataArr[idx] = editInput.value;
-         addItem.render();
-      })
-  
+
+      //案住shift勾選指定範圍
+      document.querySelectorAll('.list-block input[type="checkbox"]').forEach((item)=>{
+        item.addEventListener('click', this.shiftcheck);
+     })
     },
     //初始化運行
     init(){
