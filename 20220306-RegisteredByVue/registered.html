@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css.css">
+    <title>Registered</title>
+</head>
+<body>
+    <div id="app" class="wrap" >
+        <form action="" v-if="!isReg">
+           <label for="name">
+              <span>NAME</span>
+              <input type="text" id="name" placeholder="請輸入姓名"
+                     v-model='registered.username'>
+              <p class="error" v-if="error_message.username">{{error_message.username}}</p>
+            </label>
+            <label for="password">
+              <span>PASSWORD</span>
+              <input type="password" id="password" placeholder="請輸入密碼"
+                     v-model='registered.password'>
+               <p class="error" v-if="error_message.password">{{error_message.password}}</p>
+            </label>
+            <label for="email">
+              <span>E-MAIL</span>
+              <input type="email" id="email" placeholder="請輸入email"
+                     v-model='registered.email'>
+              <p class="error"  v-if="error_message.email">{{error_message.email}}</p>
+            </label>
+            <label for="age">
+              <span>AGE</span>
+              <input type="number" id="age" placeholder="請輸入年齡"
+                     v-model='registered.age'>
+            </label>
+            <div class="box-gender">
+                <label for="genderMan">
+                  <input name="gender" type="radio" id="genderMan" 
+                         v-model='registered.gender'> 男性
+                </label>
+                <label for="genderWoman">
+                  <input name="gender" type="radio" id="genderWoman" 
+                         v-model='registered.gender'> 女性
+                </label>
+                <label for="genderUnknow">
+                  <input name="gender" type="radio" id="genderUnknow" 
+                         v-model='registered.gender'> 不透露
+                </label>
+            </div>
+            <label for="checkbox">
+              <input type="checkbox" id="checkbox"
+                     v-model='registered.terms'> 我已閱讀使用者條款
+            </label>
+            <div class="box-btn">
+                <a class="btn" @click="handleSubmit">SUBMIT</a>
+                <!-- <button class="btn" @click="handleSubmit">SUBMIT</button> -->
+                <!-- 為什麼不可以用button打API ?? -->
+            </div>
+        </form>
+        <div class="box-alert" v-if="isReg">
+            <h1>註冊成功</h1>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.0/axios.min.js"></script>
+    <script src="./vue.js"></script>
+    <script src="./js.js"></script>
+</body>
+</html>
