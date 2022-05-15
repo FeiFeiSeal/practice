@@ -7,9 +7,7 @@
     --bgc: #FFFFFF;          /*主背景色*/
     --gap: 30px;
 }
-body{
-    font-family: 'Noto Sans TC', sans-serif;
-}
+body{  font-family: 'Noto Sans TC', sans-serif;}
 .wrap{
     max-width: 1024px;
     padding: 0 var(--gap);
@@ -331,6 +329,7 @@ body{
     .product-block .product-list{
         max-width: 300px;
         width: calc(100%/3);
+        padding-bottom: 90px;
     }
     .product-block .product-demo{
         width: calc(100%/3*2);
