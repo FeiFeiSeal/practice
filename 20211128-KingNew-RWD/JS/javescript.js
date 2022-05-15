@@ -74,10 +74,10 @@ headerUnlock.addEventListener("click",function(){
 //header日期顯示    
     var monthName = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
     var weekName = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-    var Today = new Date();
+    var Today=new Date();
     var date = document.getElementById("date");
-    
-    date.innerHTML = weekName[Today.getDay()]+". "+monthName[Today.getMonth()]+" "+Today.getDate()+", "+Today.getFullYear();
+
+    date.innerHTML = weekName[0]+". "+monthName[0]+" "+Today.getDate()+", "+Today.getFullYear();
 
 
 
