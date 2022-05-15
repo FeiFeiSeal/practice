@@ -329,7 +329,7 @@ body{  font-family: 'Noto Sans TC', sans-serif;}
     .product-block .product-list{
         max-width: 300px;
         width: calc(100%/3);
-        padding-bottom: 90px;
+        padding-bottom: calc(60px + var(--gap));
     }
     .product-block .product-demo{
         width: calc(100%/3*2);
