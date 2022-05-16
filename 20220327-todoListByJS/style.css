@@ -49,6 +49,12 @@ body{
     font-size: 54px;
     vertical-align: middle; 
 }
+.title-block p{
+    padding-bottom: 5px;
+    color:#aaa;
+    font-size: 14px;
+    text-align: right;
+}
 /*清單項目區------------------*/
 .main-list .list-block{
     display: flex;

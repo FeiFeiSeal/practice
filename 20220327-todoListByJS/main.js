@@ -54,26 +54,20 @@ const addItem = {
       //項目判斷是否在勾選的兩個項目之間，碰到第一個勾選的會打開，後勾選時關閉
       //當開關開啟時，迴圈內的項目皆會勾選
       let inBetween = false; 
-      
-      //假使使用者在全無勾選情況下就案shift勾選可以一次全選
-      let first = InputArray[0];
-      if(!e.shiftKey && this.checked){ first = this;}
-      
-      //當案著 shift + 勾選時才會觸發連續勾選
-      if(e.shiftKey && this.checked){
-        let lastCheck = this;
-
-        InputArray.forEach((el)=>{
-          if(el === first ||el === lastCheck){
-            inBetween = !inBetween;
-          }
-          if (inBetween){
-            el.checked = true;
-          }
-        })
-      }
-      
-
+  
+      if(!e.shiftKey && this.checked) firstCheck = this;  
+        //當案著 shift + 勾選時才會觸發連續勾選
+        if(e.shiftKey && this.checked){
+          lastCheck = this; 
+          InputArray.forEach((el)=>{
+            if(el === firstCheck || el === lastCheck){
+              inBetween = !inBetween;
+            }
+            if (inBetween){
+              el.checked = true;
+            }
+          })     
+        }
     },
     render(){
       let toHTML = "";
