@@ -49,11 +49,23 @@ body{
     font-size: 54px;
     vertical-align: middle; 
 }
-.title-block p{
-    padding-bottom: 5px;
-    color:#aaa;
+.title-block .clear{
+    padding: 5px 10px;
+    border-radius: 20000px;
+    border: 1px solid #eee;
+    color: var(--color);
     font-size: 14px;
-    text-align: right;
+    font-weight: 700;
+    float: right;
+    background-color: #fcf6e7;
+    transition: .2s ease-out;
+}
+.title-block .clear:hover{
+    color: #fff;
+    background-color: var(--color);
+}
+.title-block .clear:active{
+    transform: translateY(3px);
 }
 /*清單項目區------------------*/
 .main-list .list-block{
@@ -66,6 +78,7 @@ body{
 }
 .list-block li{
     display: flex;
+    justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
     margin-bottom: 10px;
@@ -79,8 +92,12 @@ body{
 
 .list-block li label{  
     display: flex;
-    width: 85%;
+    width: 90%;
     cursor: pointer;
+    transition: width .2s ease-in;
+}
+.list-block li:hover label{
+    width: 85%;
 }
 .list-block input[type='checkbox']{
     width: 20px;
@@ -139,6 +156,7 @@ body{
     width: 15%;
     color: #0008;
     font-size: 14px;
+    transition: .2s ease-in;
 }
 .list-block .fnc-box.e-active{ display: flex; }
 

@@ -1,94 +1,99 @@
 const addItem = {
-    dataArr:["ABCDEFGHUJKLMN", 
-             "一二三四五六七八九十", 
-             "123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
-            "Javascript30是一個線上的教學課程，利用三十天的時間每天實作一個簡單的JS作品並自身初學者的角度講解相關概念。 ",
-            "git",
-            "▽. ˙‥‧‵、。﹐﹒﹔﹕！＃＄％＆＊，．：；？＠～•…·¡¿¦¨¯´·¸º‽‼⁏※†‡ˉ˘⁇⁈⁉",
-          ],
+    initDataArr:[
+      {
+        txt:"ABCDEFGHUJKLMN",
+        isDone: false,
+      }, 
+      {
+        txt:"一二三四五六七八九十",
+        isDone: false,
+      }, 
+      {
+        txt:"123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789123456789",
+        isDone: false,
+      }, 
+      {
+        txt:"Javascript30是一個線上的教學課程，利用三十天的時間每天實作一個簡單的JS作品並自身初學者的角度講解相關概念。 ",
+        isDone: false,
+      }, 
+      {
+        txt:"git",
+        isDone: false,
+      }, 
+      {
+        txt:"▽. ˙‥‧‵、。﹐﹒﹔﹕！＃＄％＆＊，．：；？＠～•…·¡¿¦¨¯´·¸º‽‼⁏※†‡ˉ˘⁇⁈⁉",
+        isDone: false,
+      }, 
+    ],
     addEl(value){
-           this.dataArr.push(value);
-           this.render();
+      let dataArr = JSON.parse(localStorage.getItem('dataArr')) || [];
+      let item = {
+        txt: value,
+        isDone: false,
+      }
+      dataArr.push(item);
+      localStorage.setItem('dataArr', JSON.stringify(dataArr));
+      this.render(dataArr);
     },
-    removeEl(item){
-            this.dataArr.splice(item.dataset.id.substr(1), 1);
-            this.render();
+    removeEl(e){
+      let dataArr = JSON.parse(localStorage.getItem('dataArr'));
+      dataArr.splice(e.target.parentNode.dataset.id.substr(1), 1);
+      localStorage.setItem('dataArr', JSON.stringify(dataArr));
+      this.render(dataArr);
     },   
-    editEl(item, idx){
-       let fucBox = item.parentNode;
-       let notBox =  item.parentNode.parentNode.querySelector('.note-box');
-       let editInput = item.parentNode.parentNode.querySelector('.edit');
-       
-       function removeClass(){
-         fucBox.classList.remove('e-active');
-         notBox.classList.remove('e-active');
-       }
-         fucBox.classList.add('e-active')
-         notBox.classList.add('e-active');
+    editEl(e){
+      let dataArr = JSON.parse(localStorage.getItem('dataArr'));
+      const listItems = document.querySelectorAll('.list-block li');
+      const idx = e.target.parentNode.dataset.id.substr(1)
+      const listItem = listItems[idx];
+      const fncBox = listItem.querySelector('.fnc-box');
+      const notBox = listItem.querySelector('.note-box');
+      const editTxt = listItem.querySelector('.edit');
       
-      //結束編輯，把編輯內容推到資料arr，並重新render
-      //blur 涵蓋了點擊OK...
-      // item.addEventListener('click', ()=>{
-      //   console.log('click');
-      //    removeClass();
-      //    addItem.dataArr[idx] = editInput.value;
-      //    addItem.render();
-      // });  
-      editInput.addEventListener('keyup', (e)=>{
-        if(e.keyCode === 13){
-           removeClass();
-           addItem.dataArr[idx] = editInput.value;
-           addItem.render();
-        };
-      });
-      editInput.addEventListener('blur', ()=>{
-         removeClass();
-         addItem.dataArr[idx] = editInput.value;
-         addItem.render();
-      })
+      for(i=0; i< listItems.length; i++){
+        if(i == idx) continue;
+        listItems[i].querySelector('.fnc-box').classList.remove('e-active');
+        listItems[i].querySelector('.note-box').classList.remove('e-active');
+      }
+
+      fncBox.classList.toggle('e-active')
+      notBox.classList.toggle('e-active');
+
+      if(editTxt.value !== dataArr[idx].txt){
+        fncBox.classList.remove('e-active');
+        notBox.classList.remove('e-active');
+        dataArr[idx].txt = editTxt.value;
+        localStorage.setItem('dataArr', JSON.stringify(dataArr));
+        this.render(dataArr);
+      }
   
     },
-    shiftcheck(e){
-      const InputArray = Array.from(document.querySelectorAll('.list-block input[type="checkbox"]'));
-      
-      //項目判斷是否在勾選的兩個項目之間，碰到第一個勾選的會打開，後勾選時關閉
-      //當開關開啟時，迴圈內的項目皆會勾選
-      let inBetween = false; 
-  
-      if(!e.shiftKey && this.checked) firstCheck = this;  
-        //當案著 shift + 勾選時才會觸發連續勾選
-        if(e.shiftKey && this.checked){
-          lastCheck = this; 
-          InputArray.forEach((el)=>{
-            if(el === firstCheck || el === lastCheck){
-              inBetween = !inBetween;
-            }
-            if (inBetween){
-              el.checked = true;
-            }
-          })     
-        }
+    toggleCheck(e){
+      let dataArr = JSON.parse(localStorage.getItem('dataArr'));
+      let idx = e.target.id.substr(1);
+      dataArr[idx].isDone = !dataArr[idx].isDone;
+      localStorage.setItem('dataArr', JSON.stringify(dataArr));
+      this.render(dataArr);
     },
-    render(){
+    render(dataArrValue=[]){
       let toHTML = "";
-      let addInput = document.getElementById("addInput");
-      
+      const dataArr =  dataArrValue;
       //render出資料
-      this.dataArr.forEach((item, index)=>{
+      dataArr.forEach((item, index)=>{
         //轉換程式碼為一般文字 (HTML字符取代)
         //特別注意"<" ">" "&" "空格" 
-        //遇到 "> 結果一直複製...
-        let newItem = item.replace(/</g,"&lt;").replace(/>/g,"&gt;");
+        //如果遇到 ">"會一直複製...
+        let newItem = item.txt.replace(/</g,"&lt;").replace(/>/g,"&gt;");
         toHTML += `<li>
                       <label for="i${index}">
-                        <input type="checkbox" id="i${index}"> 
+                        <input type="checkbox" id="i${index}" ${item.isDone? "checked":""}> 
                          <div class="note-box">
                              <span>${newItem}</span>
                              <textarea class="edit" value="${newItem}">${newItem}</textarea>
                          </div>
                       </label>
                       <div class="fnc-box">
-                        <div class="edit-item"">
+                        <div class="edit-item" data-id="d${index}">
                             <span>edit</span>
                             <span>OK</span>
                         </div>
@@ -97,44 +102,54 @@ const addItem = {
                   </li>`
       })
       document.querySelector('.list-block').innerHTML = toHTML;
-      
-      //增加項目  
-      addInput.addEventListener('keyup', (e) => {
-         if(e.keyCode === 13 && addInput.value.trim()!=="" ){
-           this.addEl(addInput.value);
-           addInput.value = "";
-         }     
-      });
-      document.getElementById("addBtn").addEventListener('click', () => {
-        if(addInput.value.trim()!==""){
-           this.addEl(addInput.value);
-           addInput.value = "";
-        }
-      });
-      
-      //刪除項目
-      document.querySelectorAll('.delete-item').forEach((item)=>{
-           item.addEventListener('click', (e)=>{
-           this.removeEl(item);          
-        });
-      })
-      
-      //編輯項目(開始編輯)
-      document.querySelectorAll('.edit-item').forEach((item,idx)=>{
-         item.addEventListener('click', ()=>{
-           this.editEl(item, idx);
-           item.parentNode.parentNode.querySelector('.edit').focus();
-        });
-      })
-
-      //案住shift勾選指定範圍
-      document.querySelectorAll('.list-block input[type="checkbox"]').forEach((item)=>{
-        item.addEventListener('click', this.shiftcheck);
-     })
     },
     //初始化運行
     init(){
-      this.render();    
+      let addInput = document.getElementById("addInput");
+      let listBlock = document.querySelector(".list-block")
+      if(!localStorage.getItem('dataArr')){
+        console.log('沒有local資料，呈現範例資料')
+        localStorage.setItem('dataArr', JSON.stringify(this.initDataArr));
+        this.render(JSON.parse(localStorage.getItem('dataArr')));
+      }else{
+        this.render(JSON.parse(localStorage.getItem('dataArr')));
+      }
+      //event delegate
+      listBlock.addEventListener('click', (e)=>{
+        //刪除項目
+        if(e.target.parentNode.matches('.delete-item')) return this.removeEl(e);  
+        //編輯項目
+        if(e.target.parentNode.matches('.edit-item')) return  this.editEl(e);
+        //勾選項目
+        if(e.target.matches('input')) return this.toggleCheck(e);
+      })
+
+      //增加項目  
+      addInput.addEventListener('keyup', (e) => {
+        if(e.keyCode === 13 && addInput.value.trim()!=="" ){
+          this.addEl(addInput.value);
+          addInput.value = "";
+        }     
+      });
+      document.getElementById("addBtn").addEventListener('click', () => {
+        if(addInput.value.trim()!==""){
+            this.addEl(addInput.value);
+            addInput.value = "";
+        }
+      });
+       
+      //清除
+      document.querySelector('.clear').addEventListener('click', ()=>{
+        if(!localStorage.getItem('dataArr')){
+          console.log('沒有local資料可以清除')
+          this.initDataArr = [];
+          this.render(this.initDataArr);
+        }else{
+          console.log('清除local資料')
+          localStorage.removeItem('dataArr');
+          this.render();
+        }
+      })
     },
     
   };
