@@ -96,9 +96,6 @@ body{
     cursor: pointer;
     transition: width .2s ease-in;
 }
-.list-block li:hover label{
-    width: 85%;
-}
 .list-block input[type='checkbox']{
     width: 20px;
     height: 20px;
