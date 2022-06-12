@@ -17913,13 +17913,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 console.log("hello world!");
 
 window.onload = function () {
-  // const footer = document.querySelector('.main-footer');
-  // axios.get("./components/copyRight.html")
-  // .then(function(res){
-  //     // console.log(res.data);
-  //     // footer.innerHTML = res.data
-  // })
-
   /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
   /*<!-- Initialize Swiper -->*/
