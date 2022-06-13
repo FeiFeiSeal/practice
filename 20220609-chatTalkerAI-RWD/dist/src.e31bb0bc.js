@@ -13486,12 +13486,31 @@ function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && 
 
 /*----------------自訂義樣式-----------------------*/
 //除了套件以外的CSS樣式、Bootstraps自定義樣式
-console.log("parcel 打包");
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+
+/*----------------導入共用組件---------------------*/
+// import copyRight from "./components/copyRight.html";
+// import header from "./components/header.html";
+// import logo from './img/logo.png'
+console.log("parcel 打包1234565");
 
 window.onload = function () {
+  // const mainFooter = document.querySelector(".main-footer");
+  // const mainHeader = document.querySelector(".main-header");
+  // // mainHeader.innerHTML = header; //從component header那邊的路徑轉譯會錯誤
+  // mainHeader.innerHTML = 
+  //   `<div class="container-sm d-flex justify-content-between align-items-center">
+  //       <h1 class="main-logo">
+  //         <a href="index.html"><img class="w-100" src="${logo}" alt="chatTalkAILogo"></a>
+  //       </h1>
+  //       <a href="charge.html" class="btn charge-btn">方案費用</a>
+  //   </div>`
+  // mainFooter.innerHTML = copyRight;
+
   /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-  /*<!-- Initialize Swiper -->*/
+  /*<!-- Initialize Swiper --------------------------------->*/
 
   /*381-ratio-breakpoints*/
 
@@ -13530,7 +13549,7 @@ window.onload = function () {
   });
   /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 
-  /*<!-- wow.js -->*/
+  /*<!-- wow.js ------------------------------------------->*/
 
   var wow = new _wow.default({
     boxClass: 'wow',
@@ -13581,7 +13600,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51378" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51605" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

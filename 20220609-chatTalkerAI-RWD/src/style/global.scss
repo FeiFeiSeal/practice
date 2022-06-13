@@ -60,7 +60,8 @@ a{
 }
 
 /*font-size 調整*/
-@mixin RwdFz( $sm: 16 , $xxl: 16, $fw: 400 ) {
+@mixin RwdFz( $sm: 16 , $xxl: 16, $fw: 400, $color: $main-txt-color ) {
+    color: $color;
     font-size: #{$sm}px;
     font-weight: $fw;
     @media (min-width: 576px){ font-size: #{($xxl/1440)*100}vw;}
