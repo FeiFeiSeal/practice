@@ -1,0 +1,50 @@
+/*.main-header----------------------------------*/
+.main-header{
+    padding: 24px 0;
+    position: relative;
+    @media (max-width: 576px){
+        padding: 16px 0;
+        border-bottom: 3px solid $sub-color;
+        background-color: #fff;
+        position: sticky;
+        top: 0;
+        z-index: 99;
+    }
+    .charge-btn{
+        background-color: $alert-color;
+        &:hover{ background-color: darken($alert-color , 10%);}
+    }
+    .main-logo{
+        width: 40%;
+        min-width: 135px;
+        max-width: 220px;
+        &:hover{
+            animation: headShake ease-in-out 1s;
+        }
+    }
+}
+@keyframes headShake {
+    0% {
+      transform: translateX(0);
+    }
+  
+    6.5% {
+      transform: translateX(-6px) rotateY(-9deg);
+    }
+  
+    18.5% {
+      transform: translateX(5px) rotateY(7deg);
+    }
+  
+    31.5% {
+      transform: translateX(-3px) rotateY(-5deg);
+    }
+  
+    43.5% {
+      transform: translateX(2px) rotateY(3deg);
+    }
+  
+    50% {
+      transform: translateX(0);
+    }
+  }

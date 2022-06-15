@@ -1,0 +1,55 @@
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+ /* Bootstrap v5.0.0*/
+@import "../bootstrap-5.0.0/scss/functions";
+@import "../bootstrap-5.0.0/scss/mixins";
+// @import "../bootstrap-5.0.0/scss/variables";
+@import "./helper/variables";
+@import "../bootstrap-5.0.0/scss/utilities";
+@import "../bootstrap-5.0.0/scss/utilities/api";
+// @import "../bootstrap-5.0.0/scss/root";
+@import "../bootstrap-5.0.0/scss/reboot";
+@import "../bootstrap-5.0.0/scss/grid";
+@import "../bootstrap-5.0.0/scss/containers";
+// @import "../bootstrap-5.0.0/scss/accordion"; /*下拉式選單樣式*/
+@import "../bootstrap-5.0.0/scss/transitions"; /*下拉式選單使用*/
+
+// @import "../bootstrap-5.0.0/scss/bootstrap.scss"; /*一次引入*/
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/*reset-------------------------------------------*/
+@import "./reset.css";
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/*font-family------------------------------------*/
+
+//font-family: 'Noto Sans TC', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap');
+// font-family: 'Wendy One', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Wendy+One&display=swap');
+// font-family: 'Comfortaa', cursive;
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');;
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/*global------------------------------------------*/
+//主題色 + 通用基本設定(字型、標題、按鈕)
+@import "./global.scss";
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/*插件-swiper-------------------------------------*/
+@import "./helper/swiperjs.css";
+@import './helper/sweetAlert.scss';
+
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/*components-------------------------------------*/
+@import "./components/_header.scss";
+@import "./components/_copyRight.scss";
+@import "./components/scrollTop.scss";
+
+/*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+/*views------------------------------------------*/
+@import "./views/_home.scss";
+@import './views/_charge.scss';
+
+

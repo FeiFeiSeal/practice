@@ -1,0 +1,68 @@
+/*斷點：576px  1440px*/
+
+$main-color: #56C4C5;
+$main-color-light: #40D3D4;
+$sub-color: #FFD153;
+$alert-color: #FF5D50;
+
+$main-txt-color: #221E1F;
+$main-txt-color-light: #747474;
+
+
+body{ font-family: 'Noto Sans TC', sans-serif;}
+a{ text-decoration: none;}
+
+/*按鈕*/
+.btn{
+    display: inline-block;
+    padding: 12px 32px; 
+    border-radius: 27px;
+    font-size: 16px;
+    color: #fff;
+    background-color: $main-color;
+    transition: .2s ease-out;
+    &:hover{
+        color: #fff;
+        background-color: darken($main-color , 10%);
+    }
+    @media (max-width: 576px) {
+        padding: 3% 4%;
+        font-size: 5vw;   
+    }
+}
+/*通用區塊標題*/
+.title-block {
+    padding-bottom: 32px;
+    text-align: center;
+    @media (min-width: 576px){ padding-bottom: 16px;}
+    h3{
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 1.5;
+        @media (min-width: 576px){ font-size: 2.4vw;}
+        @media (min-width: 1440px){ font-size: 32px;}
+        span{
+            display: block;
+            margin: 16px 0;
+            font-size: 18px;
+            font-weight: 400;
+            @media (min-width: 576px){ font-size: 1.4vw;}
+            @media (min-width: 1440px){ font-size: 20px;}
+        }
+    }
+}
+/*區塊間隔*/  
+.area-pb{
+    padding-bottom: 7.5%;
+    @media (max-width: 576px){ padding-bottom: 16%;}
+    @media (min-width: 1400px){ padding-bottom: 100px;}
+}
+
+/*font-size 調整*/
+@mixin RwdFz( $sm: 16 , $xxl: 16, $fw: 400, $color: $main-txt-color ) {
+    color: $color;
+    font-size: #{$sm}px;
+    font-weight: $fw;
+    @media (min-width: 576px){ font-size: #{($xxl/1440)*100}vw;}
+    @media (min-width: 1440px){ font-size: #{$xxl}px;}
+}

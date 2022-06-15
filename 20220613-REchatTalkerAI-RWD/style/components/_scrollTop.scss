@@ -1,0 +1,39 @@
+.scroll-top{
+   width: 13.3333333%;
+   padding-bottom: 13.333333%;
+   aspect-ratio: 1 / 1;
+   min-width: 50px;
+   min-height: 50px;
+   border-radius: 50%;
+   color: #fff;
+   text-align: center;
+   vertical-align: middle;
+   background-color: $main-color;
+   position: fixed;
+   bottom: 4%;
+   right: 4%;
+   z-index: 90;
+   transition: .2s;
+   &:hover{  background-color: lighten($main-color, 10%);}
+   @media (min-width: 576px){
+       width: 5%;
+       padding-bottom: 5%;
+   }
+   @media (min-width: 1440px) {
+       width: 71px;
+       height: 71px;
+       padding-bottom: 0;
+   }
+   &::after{
+       content:"Top";
+       font-family: 'Wendy One', sans-serif;
+       font-size: 14px;
+       position: absolute;
+       top: 50%;
+       left: 50%;
+       vertical-align: middle;
+       transform: translate(-50%, -50%);
+       @media (min-width: 576px){ font-size: 1.3vw;}
+       @media (min-width: 1440px){ font-size: 18px;}
+   }
+}
