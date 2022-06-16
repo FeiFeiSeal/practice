@@ -1,5 +1,9 @@
-import { charge } from './data/chargeData.js'
+let chargeOri = []
 
+function getCharge(){
+  return axios.get('./data/chargeData.json')
+    .then((res)=> chargeOri = res.data)
+}
 function getHeader(){
   return fetch('./components/header.html').then((res)=> res.text())
 }
@@ -9,7 +13,7 @@ function getCopyRight(){
 
 console.log("%c內容純屬虛構", "color:red; font-size:40px");
 
-
+getCharge();
 window.onload = function(){
   const App = document.getElementById("app");
   const mainFooter = document.querySelector(".main-footer");
@@ -70,9 +74,6 @@ window.onload = function(){
       resetAnimation: true,     // reset animation on end (default is true)
     }
   );
-
-  /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
-  /*<!-- 載入共用組件 --------------------------------->*/
   //滾回頁首
   function setScrollTopBtn(){
     let scrollBtn = document.createElement('div');
@@ -84,7 +85,6 @@ window.onload = function(){
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
-
   // sweetAlertBtn();
   function sweetAlertBtn(){
     let setExperBtn = document.querySelectorAll(".experience-btn");
@@ -96,10 +96,13 @@ window.onload = function(){
       })
     })
   }
+  /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
+  /*<!-- 載入共用組件 --------------------------------->*/
+
 
   /*-----charge資費表載入------------------------------*/
   //載入資費清單
-  let chargeArr = charge.map((obj)=> obj.charge )
+  let chargeArr = chargeOri.map((obj)=> obj.charge )
   let chargeInit = '10000';
   
   //按鈕選取效果添加與移除
@@ -133,7 +136,7 @@ window.onload = function(){
   }
   function rederChargeBox(getCharge){
     let chargeBox = document.querySelector('.charge-box');
-    let getChargeObj = charge.filter((obj)=> obj.charge === getCharge );
+    let getChargeObj = chargeOri.filter((obj)=> obj.charge === getCharge );
     let basicCost = getChargeObj[0].project[0].cost;
     let norCost = getChargeObj[0].project[1].cost;
 
@@ -232,6 +235,7 @@ window.onload = function(){
 
   //如果有抓到 chargeList 存在才會觸發
   if(chargeList){
+    
     //charge 頁面預設呈現
     rederChargeBox(chargeInit);
     renderchargeList();
