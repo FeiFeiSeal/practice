@@ -103,10 +103,10 @@ window.onload = function(){
                     <label for="chargeSelect">拍攝方案</label>
                         <select name="" id="chargeSelect">
                             <option value="0">請選擇方案</option>
-                            <option value="1">個人方案</option>
-                            <option value="2">閨蜜方案</option>
-                            <option value="3">情侶方案</option>
-                            <option value="4">婚紗方案</option>
+                            <option value="個人方案">個人方案</option>
+                            <option value="閨蜜方案">閨蜜方案</option>
+                            <option value="情侶方案">情侶方案</option>
+                            <option value="婚紗方案">婚紗方案</option>
                         </select>
                     <label for="chargeNote">備註給客服</label>
                     <textarea name="" id="chargeNote" cols="30" rows="10"></textarea>
@@ -114,20 +114,24 @@ window.onload = function(){
                  `,
             focusConfirm: false,
             preConfirm: () => {
-           
-              return axios.post('https://script.google.com/macros/s/AKfycbyz32PJF1tJAUDCrgHlbL7w5zx1Jd2qWbXyc8WyL8buI0w4WS_zLBjS-BtI7f-kRWKszQ/exec', 
-              JSON.stringify({
-                name: document.getElementById('chargeName').value,
-                email: document.getElementById('chargeEmail').value
-              }),  {
-                headers: {
-                  'Content-Type': 'multipart/form-data'
-                }
-              })
-                    .then((res)=>{ 
+                  let formdata = new FormData();
+                  formdata.append('name', `${document.getElementById('chargeName').value}`);
+                  formdata.append('email', `${document.getElementById('chargeEmail').value}`);
+                  formdata.append('person', `${document.getElementById('chargePersonNum').value}`);
+                  formdata.append('date', `${document.getElementById('chargeDate').value}`);
+                  formdata.append('select', `${document.getElementById('chargeSelect').value}`);
+                  formdata.append('note', `${document.getElementById('chargeNote').value}`);
+
+                  return axios.post('https://script.google.com/macros/s/AKfycby8jW2-e0oj4YZHnxHDvGNGVnUkBnRlEtGa8P-1gDTw0AirK9fpHD5OPpZYg3HahcgN/exec', 
+                                     formdata)
+                          .then((res)=>{ 
+                              console.log(res.data);
+                              Swal.fire("收到您的需求<br>客服將主動與您聯絡!")
+                          })
+                          .catch((res)=>{
                             console.log(res.data);
-                            Swal.fire("收到您的需求<br>客服將主動與您聯絡!")})
-                    .catch((res)=> Swal.fire("出了一點小問題:( <br>請直接向粉絲專頁小編預約"))
+                            Swal.fire("出了一點小問題:( <br>請直接向粉絲專頁小編預約")
+                          })
             }
             
           })
