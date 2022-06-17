@@ -114,17 +114,20 @@ window.onload = function(){
                  `,
             focusConfirm: false,
             preConfirm: () => {
+           
               return axios.post('https://script.google.com/macros/s/AKfycbyz32PJF1tJAUDCrgHlbL7w5zx1Jd2qWbXyc8WyL8buI0w4WS_zLBjS-BtI7f-kRWKszQ/exec', 
               JSON.stringify({
-                          name: document.getElementById('chargeName').value,
-                          email: document.getElementById('chargeEmail').value
-                        }))
+                name: document.getElementById('chargeName').value,
+                email: document.getElementById('chargeEmail').value
+              }),  {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+              })
                     .then((res)=>{ 
                             console.log(res.data);
                             Swal.fire("收到您的需求<br>客服將主動與您聯絡!")})
                     .catch((res)=> Swal.fire("出了一點小問題:( <br>請直接向粉絲專頁小編預約"))
-                        // document.getElementById('chargeSelect').value,
-                // document.getElementById('swal-input2').value
             }
             
           })
