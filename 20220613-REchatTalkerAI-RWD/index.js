@@ -73,13 +73,62 @@ window.onload = function(){
   }
 
   /*<!-- sweetAlertBtn設定--------------------------------->*/
-  function sweetAlertBtn(){
+  // function sweetAlertBtn(){
+  //   let setExperBtn = document.querySelectorAll(".experience-btn");
+  //   //監聽物件啟動 sweetAlert
+  //   setExperBtn.forEach((btn)=>{
+  //     btn.addEventListener('click', function(){
+  //       Swal.fire('敬請期待!');
+  //     })
+  //   })
+    
+  // }
+  function sweetAlertBtn(data){
     let setExperBtn = document.querySelectorAll(".experience-btn");
     //監聽物件啟動 sweetAlert
     setExperBtn.forEach((btn)=>{
-      btn.addEventListener('click', function(){
-        // alert('敬請期待!')
-        Swal.fire('敬請期待!');
+      btn.addEventListener('click', async function() {
+
+          const { value: formValues } = await Swal.fire({
+            title: `${data}`,
+            showCancelButton: true,
+            confirmButtonText: '確定',
+            showLoaderOnConfirm: true,
+            html:`
+                  <form action="post">
+                    <label for="chargeName">聯絡人<input type="text" id="chargeName"></label>
+                    <label for="chargeEmail">聯絡信箱<input type="email" id="chargeEmail"></label>
+                    <label for="chargePersonNum">拍攝人數<input type="number" id="chargePersonNum"></label>
+                    <label for="" for="chargeDate">拍攝日期<input type="date" id="chargeDate"></label>
+                    <label for="chargeSelect">拍攝方案</label>
+                        <select name="" id="chargeSelect">
+                            <option value="0">請選擇方案</option>
+                            <option value="1">個人方案</option>
+                            <option value="2">閨蜜方案</option>
+                            <option value="3">情侶方案</option>
+                            <option value="4">婚紗方案</option>
+                        </select>
+                    <label for="chargeNote">備註給客服</label>
+                    <textarea name="" id="chargeNote" cols="30" rows="10"></textarea>
+                  </form>
+                 `,
+            focusConfirm: false,
+            preConfirm: () => {
+              return axios.post('https://script.google.com/macros/s/AKfycbyz32PJF1tJAUDCrgHlbL7w5zx1Jd2qWbXyc8WyL8buI0w4WS_zLBjS-BtI7f-kRWKszQ/exec', {
+                name: document.getElementById('chargeName').value,
+                email: document.getElementById('chargeEmail').value
+              })
+                // document.getElementById('chargeSelect').value,
+                // document.getElementById('swal-input2').value
+            }
+            
+          })
+          
+          if (formValues) {
+            Swal.fire("收到您的需求<br>客服將主動與您聯絡!")
+            // JSON.stringify(formValues)
+          }
+          
       })
     })
   }
@@ -215,7 +264,7 @@ window.onload = function(){
                     </div>
                 </div>`
         //重新渲染sweetalert
-        sweetAlertBtn();
+        sweetAlertBtn(getChargeDataSet);
       }
 
       chargeList.addEventListener('click', render);
