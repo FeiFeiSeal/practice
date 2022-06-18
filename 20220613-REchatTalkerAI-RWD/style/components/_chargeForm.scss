@@ -1,0 +1,113 @@
+
+$main-color: #56C4C5; 
+$main-color-light: #40D3D4;
+$sub-color: #FFD153;
+$alert-color: #FF5D50;
+$main-txt-color: #221E1F;
+$main-txt-color-light: #747474;
+      
+.chargeContainer{
+    font-size: 16px;
+    .chargePopup{
+        .chargeTitle{
+          padding: 4%;
+          border-bottom: 1px solid #ddd;
+        }
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            font-size: 16px;
+            label{
+                width: 80%;
+                margin:0 auto 16px;
+                @media (min-width: 576px) {
+                    display: flex;
+                }
+               &:not(:last-of-type)::before{
+                        content: "";
+                        display: inline-block;
+                        width: 16px;
+                        height: 16px;
+                        margin-right: 4%;
+                        background-image: url(../img/icon_check.svg);
+                        @media (min-width: 576px) {
+                            margin-right: 3%;
+                        }
+                }
+            }
+            input{
+                display: inline-block;
+                width: 60%;
+                margin-left: 8px;
+                padding: 0 16px;
+                border-radius: 3px;
+                border: 1px solid $main-txt-color-light;
+               &:focus{
+                  outline: none;
+                  background-color: lighten(#FFD153, 30%);
+                }
+                @media (max-width: 576px) {
+                    width: 80%;
+                    padding: 0 4%;
+                }
+            }
+            select{
+               width: 60%;
+               margin-left: 8px;
+               padding: 0 16px;
+               border-radius: 3px;
+               border: 1px solid $main-txt-color-light;
+               @media (max-width: 576px) {
+                    width: 80%;
+                    padding: 0 4%;
+               }
+            }
+            textarea{
+               width: 80%;
+               margin: auto;
+               resize: none;
+               overflow-y: hidden;
+              &:focus{
+                  outline: none;
+                  background-color: lighten(#FFD153, 30%);
+               }
+            }
+        }
+        .chargeAction{
+          width: 100%;
+            .chargeconfirmBtn{
+                padding: 12px 32px;
+                border-radius: 27px;
+                font-size: 16px;
+                color: #fff;
+                background-color: $main-color;
+                transition: .2s ease-out;
+                &:hover{ background-color: darken($main-color , 10%);}
+                @media (max-width: 576px) {
+                    padding: 3% 4%;
+                    font-size: 5vw;   
+                }
+            }
+            .chargeCancelBtn{
+                padding: 12px 32px;
+                border-radius: 27px !important;
+                font-size: 16px;
+                color: #fff;
+                background-color: $main-txt-color-light;
+                transition: .2s ease-out;
+                &:hover{ background-color: darken($main-txt-color-light, 10%);}
+                @media (max-width: 576px) {
+                    padding: 3% 4%;
+                    font-size: 5vw;   
+                }
+            }
+        }
+    }
+}
+    
+
+
+
+
+

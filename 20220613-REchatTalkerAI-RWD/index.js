@@ -87,60 +87,83 @@ window.onload = function(){
     let setExperBtn = document.querySelectorAll(".experience-btn");
     //監聽物件啟動 sweetAlert
     setExperBtn.forEach((btn)=>{
-      btn.addEventListener('click', async function() {
-
+      btn.addEventListener('click', async function(e) {
+          let chargetype = this.dataset.chargetype;
+          let inptType = chargetype === "basic"? "基本版":"標準版";
+          
           const { value: formValues } = await Swal.fire({
-            title: `${data}`,
+            title: `${data}位 (${inptType})`,
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp animate__delay-0.2s'
+            },
             showCancelButton: true,
             confirmButtonText: '確定',
             showLoaderOnConfirm: true,
             html:`
                   <form action="post">
-                    <label for="chargeName">聯絡人<input type="text" id="chargeName"></label>
-                    <label for="chargeEmail">聯絡信箱<input type="email" id="chargeEmail"></label>
-                    <label for="chargePersonNum">拍攝人數<input type="number" id="chargePersonNum"></label>
-                    <label for="" for="chargeDate">拍攝日期<input type="date" id="chargeDate"></label>
-                    <label for="chargeSelect">拍攝方案</label>
-                        <select name="" id="chargeSelect">
-                            <option value="0">請選擇方案</option>
-                            <option value="個人方案">個人方案</option>
-                            <option value="閨蜜方案">閨蜜方案</option>
-                            <option value="情侶方案">情侶方案</option>
-                            <option value="婚紗方案">婚紗方案</option>
+                    <label for="chargeName">聯絡人<input type="text" id="chargeName" required placeholder="(必填) Pearlie"> </label>
+                    <label for="chargeEmail">聯絡信箱<input type="email" id="chargeEmail" required placeholder="(必填) xxx@gmail.con"></label>
+                    <label for="chargePhone">聯絡電話<input type="text" id="chargePhone"required placeholder="(必填) 0912345678"></label>
+                    <label for="" for="chargeDate">預約日期<input type="date" id="chargeDate" required></label>
+                    <label for="chargeSelect">訂購方案
+                        <select name="" id="chargeSelect" required>
+                            <option value="${data}位 (${inptType})" selected>${data}位 (${inptType})</option>
+                            <option value="我要客製化">我要客製化</option>
                         </select>
+                    </label>
                     <label for="chargeNote">備註給客服</label>
-                    <textarea name="" id="chargeNote" cols="30" rows="10"></textarea>
+                    <textarea name="" id="chargeNote" cols="30" rows="10" ></textarea>
                   </form>
                  `,
+            customClass: 
+              {
+                popup: 'chargePopup',
+                container: 'chargeContainer',
+                title: 'chargeTitle',
+                actions: 'chargeAction',
+                cancelButton: 'chargeCancelBtn',
+                confirmButton: 'chargeconfirmBtn',
+              },
+            confirmButtonColor: "#56C4C5",
             focusConfirm: false,
             preConfirm: () => {
+                  if(!document.getElementById('chargeName').value ||
+                    !document.getElementById('chargeEmail').value||
+                    !document.getElementById('chargePhone').value||
+                    !document.getElementById('chargeDate').value||
+                    !document.getElementById('chargeSelect').value) return alert('聯絡資訊不完整');
+              
                   let formdata = new FormData();
                   formdata.append('name', `${document.getElementById('chargeName').value}`);
                   formdata.append('email', `${document.getElementById('chargeEmail').value}`);
-                  formdata.append('person', `${document.getElementById('chargePersonNum').value}`);
+                  formdata.append('phone', `${document.getElementById('chargePhone').value}`);
                   formdata.append('date', `${document.getElementById('chargeDate').value}`);
                   formdata.append('select', `${document.getElementById('chargeSelect').value}`);
                   formdata.append('note', `${document.getElementById('chargeNote').value}`);
-
+                  
                   return axios.post('https://script.google.com/macros/s/AKfycby8jW2-e0oj4YZHnxHDvGNGVnUkBnRlEtGa8P-1gDTw0AirK9fpHD5OPpZYg3HahcgN/exec', 
                                      formdata)
                           .then((res)=>{ 
                               console.log(res.data);
-                              Swal.fire("收到您的需求<br>客服將主動與您聯絡!")
+                              Swal.fire({
+                                icon: 'success',
+                                title: '收到您的需求',
+                                text: "系統將寄送訂單信件至您的信箱!",
+                                confirmButtonColor: "#56C4C5",
+                              })
                           })
                           .catch((res)=>{
                             console.log(res.data);
-                            Swal.fire("出了一點小問題:( <br>請直接向粉絲專頁小編預約")
+                            Swal.fire({
+                              icon: 'error',
+                              title: 'Oops...',
+                              text: '似乎有點狀況要找工程師:(',
+                              confirmButtonColor: "#56C4C5",
+                              footer: '<a href="#">直接向粉絲團預約吧!(前進粉絲團)</a>'
+                            })
                           })
             }
-            
           })
-          
-          // if (formValues) {
-          //   Swal.fire("收到您的需求<br>客服將主動與您聯絡!")
-          //   // JSON.stringify(formValues)
-          // }
-          
       })
     })
   }
@@ -238,7 +261,7 @@ window.onload = function(){
                         <li>客服人機轉接</li>
                     </ul>
                     <div class="btn-box">
-                        <a href="#" class="btn experience-btn">立即體驗</a>
+                        <a href="#" class="btn experience-btn" data-chargeType="basic">立即體驗</a>
                     </div>
                 </div>
                 <div id="norCharge" class="charge-card">
@@ -272,7 +295,7 @@ window.onload = function(){
                         <li>客服人機轉接＋自動指派專員處理</li>
                     </ul>
                     <div class="btn-box">
-                        <a href="#" class="btn experience-btn">立即體驗</a>
+                        <a href="#" class="btn experience-btn" data-chargeType="normal">立即體驗</a>
                     </div>
                 </div>`
         //重新渲染sweetalert

@@ -6449,6 +6449,120 @@ a {
   box-shadow: 0 0 0 3px #40D3D4;
 }
 
+.chargeContainer {
+  font-size: 16px;
+}
+.chargeContainer .chargePopup .chargeTitle {
+  padding: 4%;
+  border-bottom: 1px solid #ddd;
+}
+.chargeContainer .chargePopup form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-size: 16px;
+}
+.chargeContainer .chargePopup form label {
+  width: 80%;
+  margin: 0 auto 16px;
+}
+@media (min-width: 576px) {
+  .chargeContainer .chargePopup form label {
+    display: flex;
+  }
+}
+.chargeContainer .chargePopup form label:not(:last-of-type)::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 4%;
+  background-image: url(../img/icon_check.svg);
+}
+@media (min-width: 576px) {
+  .chargeContainer .chargePopup form label:not(:last-of-type)::before {
+    margin-right: 3%;
+  }
+}
+.chargeContainer .chargePopup form input {
+  display: inline-block;
+  width: 60%;
+  margin-left: 8px;
+  padding: 0 16px;
+  border-radius: 3px;
+  border: 1px solid #747474;
+}
+.chargeContainer .chargePopup form input:focus {
+  outline: none;
+  background-color: #fffaec;
+}
+@media (max-width: 576px) {
+  .chargeContainer .chargePopup form input {
+    width: 80%;
+    padding: 0 4%;
+  }
+}
+.chargeContainer .chargePopup form select {
+  width: 60%;
+  margin-left: 8px;
+  padding: 0 16px;
+  border-radius: 3px;
+  border: 1px solid #747474;
+}
+@media (max-width: 576px) {
+  .chargeContainer .chargePopup form select {
+    width: 80%;
+    padding: 0 4%;
+  }
+}
+.chargeContainer .chargePopup form textarea {
+  width: 80%;
+  margin: auto;
+  resize: none;
+  overflow-y: hidden;
+}
+.chargeContainer .chargePopup form textarea:focus {
+  outline: none;
+  background-color: #fffaec;
+}
+.chargeContainer .chargePopup .chargeAction {
+  width: 100%;
+}
+.chargeContainer .chargePopup .chargeAction .chargeconfirmBtn {
+  padding: 12px 32px;
+  border-radius: 27px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #56C4C5;
+  transition: 0.2s ease-out;
+}
+.chargeContainer .chargePopup .chargeAction .chargeconfirmBtn:hover {
+  background-color: #3bacad;
+}
+@media (max-width: 576px) {
+  .chargeContainer .chargePopup .chargeAction .chargeconfirmBtn {
+    padding: 3% 4%;
+    font-size: 5vw;
+  }
+}
+.chargeContainer .chargePopup .chargeAction .chargeCancelBtn {
+  padding: 12px 32px;
+  border-radius: 27px !important;
+  font-size: 16px;
+  color: #fff;
+  background-color: #747474;
+  transition: 0.2s ease-out;
+}
+.chargeContainer .chargePopup .chargeAction .chargeCancelBtn:hover {
+  background-color: #5b5b5b;
+}
+@media (max-width: 576px) {
+  .chargeContainer .chargePopup .chargeAction .chargeCancelBtn {
+    padding: 3% 4%;
+    font-size: 5vw;
+  }
+}
+
 /*■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
 /*components-------------------------------------*/
 /*.main-header----------------------------------*/
