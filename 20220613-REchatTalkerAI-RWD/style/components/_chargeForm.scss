@@ -24,6 +24,13 @@ $main-txt-color-light: #747474;
                 @media (min-width: 576px) {
                     display: flex;
                 }
+                @media (max-width: 576px) {
+                    width: 100%;
+                    padding: 0 4%;
+                }
+                &:last-of-type{
+                    margin-bottom: 5px;
+                }
                &:not(:last-of-type)::before{
                         content: "";
                         display: inline-block;
@@ -39,43 +46,57 @@ $main-txt-color-light: #747474;
             input{
                 display: inline-block;
                 width: 60%;
-                margin-left: 8px;
+                margin-left: auto;
                 padding: 0 16px;
                 border-radius: 3px;
                 border: 1px solid $main-txt-color-light;
-               &:focus{
+                &:focus{
                   outline: none;
                   background-color: lighten(#FFD153, 30%);
                 }
                 @media (max-width: 576px) {
-                    width: 80%;
+                    width: 100%;
                     padding: 0 4%;
                 }
             }
             select{
                width: 60%;
-               margin-left: 8px;
+               margin-left: auto;
                padding: 0 16px;
                border-radius: 3px;
                border: 1px solid $main-txt-color-light;
                @media (max-width: 576px) {
-                    width: 80%;
+                    width: 100%;
                     padding: 0 4%;
                }
             }
             textarea{
                width: 80%;
-               margin: auto;
+               margin: 0 auto 16px;
                resize: none;
                overflow-y: hidden;
+               @media (max-width: 576px) {
+                width: 100%;
+              }
               &:focus{
                   outline: none;
                   background-color: lighten(#FFD153, 30%);
                }
             }
+            #recaptcha{
+                margin: auto;
+            }
         }
         .chargeAction{
           width: 100%;
+          visibility: visible;
+          opacity: 1;
+          transition: .2s;
+            &.d-n{
+                visibility: hidden;
+                opacity: 0;
+                transition: .2s;
+            }
             .chargeconfirmBtn{
                 padding: 12px 32px;
                 border-radius: 27px;

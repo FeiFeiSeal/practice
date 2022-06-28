@@ -6471,6 +6471,15 @@ a {
     display: flex;
   }
 }
+@media (max-width: 576px) {
+  .chargeContainer .chargePopup form label {
+    width: 100%;
+    padding: 0 4%;
+  }
+}
+.chargeContainer .chargePopup form label:last-of-type {
+  margin-bottom: 5px;
+}
 .chargeContainer .chargePopup form label:not(:last-of-type)::before {
   content: "";
   display: inline-block;
@@ -6487,7 +6496,7 @@ a {
 .chargeContainer .chargePopup form input {
   display: inline-block;
   width: 60%;
-  margin-left: 8px;
+  margin-left: auto;
   padding: 0 16px;
   border-radius: 3px;
   border: 1px solid #747474;
@@ -6498,35 +6507,51 @@ a {
 }
 @media (max-width: 576px) {
   .chargeContainer .chargePopup form input {
-    width: 80%;
+    width: 100%;
     padding: 0 4%;
   }
 }
 .chargeContainer .chargePopup form select {
   width: 60%;
-  margin-left: 8px;
+  margin-left: auto;
   padding: 0 16px;
   border-radius: 3px;
   border: 1px solid #747474;
 }
 @media (max-width: 576px) {
   .chargeContainer .chargePopup form select {
-    width: 80%;
+    width: 100%;
     padding: 0 4%;
   }
 }
 .chargeContainer .chargePopup form textarea {
   width: 80%;
-  margin: auto;
+  margin: 0 auto 16px;
   resize: none;
   overflow-y: hidden;
+}
+@media (max-width: 576px) {
+  .chargeContainer .chargePopup form textarea {
+    width: 100%;
+  }
 }
 .chargeContainer .chargePopup form textarea:focus {
   outline: none;
   background-color: #fffaec;
 }
+.chargeContainer .chargePopup form #recaptcha {
+  margin: auto;
+}
 .chargeContainer .chargePopup .chargeAction {
   width: 100%;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.2s;
+}
+.chargeContainer .chargePopup .chargeAction.d-n {
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.2s;
 }
 .chargeContainer .chargePopup .chargeAction .chargeconfirmBtn {
   padding: 12px 32px;

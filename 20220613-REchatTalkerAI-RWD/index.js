@@ -73,16 +73,6 @@ window.onload = function(){
   }
 
   /*<!-- sweetAlertBtn設定--------------------------------->*/
-  // function sweetAlertBtn(){
-  //   let setExperBtn = document.querySelectorAll(".experience-btn");
-  //   //監聽物件啟動 sweetAlert
-  //   setExperBtn.forEach((btn)=>{
-  //     btn.addEventListener('click', function(){
-  //       Swal.fire('敬請期待!');
-  //     })
-  //   })
-    
-  // }
   function sweetAlertBtn(data){
     let setExperBtn = document.querySelectorAll(".experience-btn");
     //監聽物件啟動 sweetAlert
@@ -100,11 +90,11 @@ window.onload = function(){
             confirmButtonText: '確定',
             showLoaderOnConfirm: true,
             html:`
-                  <form action="post">
+                  <form method="post">
                     <label for="chargeName">聯絡人<input type="text" id="chargeName" required placeholder="(必填) Pearlie"> </label>
                     <label for="chargeEmail">聯絡信箱<input type="email" id="chargeEmail" required placeholder="(必填) xxx@gmail.con"></label>
                     <label for="chargePhone">聯絡電話<input type="text" id="chargePhone"required placeholder="(必填) 0912345678"></label>
-                    <label for="" for="chargeDate">預約日期<input type="date" id="chargeDate" required></label>
+                    <label for="" for="chargeDate">方案起始日期<input type="date" id="chargeDate" required></label>
                     <label for="chargeSelect">訂購方案
                         <select name="" id="chargeSelect" required>
                             <option value="${data}位 (${inptType})" selected>${data}位 (${inptType})</option>
@@ -112,7 +102,8 @@ window.onload = function(){
                         </select>
                     </label>
                     <label for="chargeNote">備註給客服</label>
-                    <textarea name="" id="chargeNote" cols="30" rows="10" ></textarea>
+                    <textarea name="" id="chargeNote" cols="30" rows="8" ></textarea>
+                    <div id="recaptcha"></div>
                   </form>
                  `,
             customClass: 
@@ -120,20 +111,47 @@ window.onload = function(){
                 popup: 'chargePopup',
                 container: 'chargeContainer',
                 title: 'chargeTitle',
-                actions: 'chargeAction',
+                actions: 'chargeAction d-n',
                 cancelButton: 'chargeCancelBtn',
                 confirmButton: 'chargeconfirmBtn',
               },
             confirmButtonColor: "#56C4C5",
             focusConfirm: false,
+            didOpen: () => {
+              grecaptcha.render('recaptcha', {
+                'sitekey': '6Ld3bZ0gAAAAAJywcQCYCqPOlFoQNTps4rt84BAS',
+                'callback': verifyCallback,
+              })
+            },
             preConfirm: () => {
+              
+                 //獲取填表時間
+                  function getTime(){
+                    let year = new Date().getFullYear();
+                    let month = new Date().getMonth()+1;
+                    let day = new Date().getDate();
+                    let hr = new Date().getHours();
+                    let min = new Date().getMinutes();
+                    return  time = `${year}-${month}-${day}-${hr}:${min}` 
+                  }
+
+                  //簡易判斷表有沒有寫
                   if(!document.getElementById('chargeName').value ||
                     !document.getElementById('chargeEmail').value||
                     !document.getElementById('chargePhone').value||
                     !document.getElementById('chargeDate').value||
-                    !document.getElementById('chargeSelect').value) return alert('聯絡資訊不完整');
-              
+                    !document.getElementById('chargeSelect').value){
+                      return Swal.showValidationMessage(`聯絡資訊不完整`);
+                    } 
+
+                  //機器人驗證
+                  if (grecaptcha.getResponse().length === 0) {
+                    return Swal.showValidationMessage(`Please verify that you're not a robot`);
+                  }
+
+                  //推送資料成FormData
                   let formdata = new FormData();
+                  formdata.append('time', getTime());
                   formdata.append('name', `${document.getElementById('chargeName').value}`);
                   formdata.append('email', `${document.getElementById('chargeEmail').value}`);
                   formdata.append('phone', `${document.getElementById('chargePhone').value}`);
@@ -141,7 +159,7 @@ window.onload = function(){
                   formdata.append('select', `${document.getElementById('chargeSelect').value}`);
                   formdata.append('note', `${document.getElementById('chargeNote').value}`);
                   
-                  return axios.post('https://script.google.com/macros/s/AKfycby8jW2-e0oj4YZHnxHDvGNGVnUkBnRlEtGa8P-1gDTw0AirK9fpHD5OPpZYg3HahcgN/exec', 
+                  return axios.post('https://script.google.com/macros/s/AKfycbwILTJY3AC0jGxTe6j0-2R95lsM7jXkaxVa2d7RSzp6mbyEkSkuvc_q3LLYaE2wauLU/exec', 
                                      formdata)
                           .then((res)=>{ 
                               console.log(res.data);
@@ -153,7 +171,6 @@ window.onload = function(){
                               })
                           })
                           .catch((res)=>{
-                            console.log(res.data);
                             Swal.fire({
                               icon: 'error',
                               title: 'Oops...',
@@ -167,7 +184,28 @@ window.onload = function(){
       })
     })
   }
+   /*<!-- reCAPTCHA 設定--------------------------------->*/
+  function verifyCallback(token) {
+    let chargeAction = document.querySelector('.chargeAction');
+    let formData = new FormData();
+    formData.append('token', token);
+    // Google Apps Script 部署為網路應用程式後取得的 URL
+    let uriGAS ='https://script.google.com/macros/s/AKfycbxfqO48h3U9jHyxDsiGP0mUQSKNL_WCttXbK5UGHzPBUsRfAWAXCc5rNOTFkw_97Iz9/exec';
+    axios.post(uriGAS, formData)
+    .then((res)=>{
+      if(res.data.success) {
+        // chargeAction.classList.remove('d-n');
+        chargeAction.style.visibility='visible';
+        chargeAction.style.opacity='1';
+        console.log('驗證成功, 按鈕出現~');
+      } else {
+        console.log('驗證失敗');
+        // success 為 false 時，代表驗證失敗，error-codes 會告知原因
+        window.alert(res.data['error-codes'][0]);
+      }
 
+    })
+  }
 
   /*■■■■■■■■■ 載入共用組件■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■*/
   /*-----打 header、footer 回來-----------------------------*/
@@ -297,6 +335,7 @@ window.onload = function(){
                     <div class="btn-box">
                         <a href="#" class="btn experience-btn" data-chargeType="normal">立即體驗</a>
                     </div>
+                   
                 </div>`
         //重新渲染sweetalert
         sweetAlertBtn(getChargeDataSet);
